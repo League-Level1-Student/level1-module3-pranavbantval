@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class SimonSays extends KeyAdapter {
-
+static Date timeAtEnd = new Date();
 	// Complete steps 1 - 7 before you test
 	// 1. Make a JFrame variable
 	JFrame f = new JFrame();
@@ -33,13 +33,10 @@ public class SimonSays extends KeyAdapter {
 	private void makeAlbum() {
 		// 2. add 4 images which match keyboard keys like this: images.put(new
 		// Integer(KeyEvent.VK_UP), "image.jpg");
-		images.put(new Integer(KeyEvent.VK_UP),
-				"https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350");
-		images.put(new Integer(KeyEvent.VK_DOWN),
-				"https://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg");
-		images.put(new Integer(KeyEvent.VK_LEFT), "https://www.w3schools.com/w3css/img_lights.jpg");
-		images.put(new Integer(KeyEvent.VK_RIGHT),
-				"https://www.gettyimages.com/gi-resources/images/Embed/new/embed2.jpg");
+		images.put(new Integer(KeyEvent.VK_UP), "pexels-photo-248797.jpeg");
+		images.put(new Integer(KeyEvent.VK_DOWN), "CMS_Creative_164657191_Kingfisher.jpg");
+		images.put(new Integer(KeyEvent.VK_LEFT), "img_lights.jpg");
+		images.put(new Integer(KeyEvent.VK_RIGHT), "cat.jpg");
 		// 3. Tell the user to "Press the matching key when 'Simon says' otherwise press
 		// a different key"
 		JOptionPane.showMessageDialog(null,
@@ -50,19 +47,24 @@ public class SimonSays extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
+		showImage();
 		// 16. make a points variable to track the score. tell the user their score at
 		// the end.
 		int points = 0;
 
 		// 17. if the keyCode matches the imageIndex and "Simon says..." increase their
 		// score
-		if (keyCode == imageIndex && word.equals("Simon says")) {
+		System.out.println(keyCode);
+		System.out.println(imageIndex);
+		System.out.println(this.simonSays);
+		if (keyCode == imageIndex && this.simonSays==1) {
 			points++;
 			speak("You were correct");
+		
 		}
 		// 18. if the keyCode doesn't match the imageIndex and "Simon didn't say..."
 		// increase their score
-		else if (keyCode != imageIndex && word.equals("")) {
+		else if (keyCode != imageIndex && this.simonSays==0) {
 			points++;
 			speak("You were correct");
 		}
@@ -74,7 +76,7 @@ public class SimonSays extends KeyAdapter {
 		// 13. increment tries by 1
 		tries = tries + 1;
 		// 14. if tries is greater than 9 (or however many you want)
-		if (tries > 2) {
+		if (tries > 5) {
 			// 15. exit the program
 			System.exit(0);
 		}
@@ -99,12 +101,21 @@ public class SimonSays extends KeyAdapter {
 		// this key"
 		// Hint: use the simonSays int and a random number
 		Random r = new Random();
-		int x = r.nextInt(1);
+		 this.simonSays = r.nextInt(2);
 		word = "";
-		if (x == 0) {
+		if (this.simonSays == 1) {
 			word = "Simon says";
-		} else if (x == 1) {
+		} else if (this.simonSays== 0) {
 			word = "";
+		}
+		if (imageIndex == 37) {
+			word = word + "Press left arrow";
+		} else if (imageIndex == 38) {
+			word = word + "Press up arrow";
+		} else if (imageIndex == 39) {
+			word = word + "Press right arrow";
+		} else if (imageIndex == 40) {
+			word = word + "Press down arrow";
 		}
 		speak(word);
 	}
@@ -122,7 +133,8 @@ public class SimonSays extends KeyAdapter {
 
 	void speak(String words) {
 		try {
-			Runtime.getRuntime().exec("say " + words).waitFor();
+		Runtime.getRuntime().exec("say " + words).waitFor();
+			System.out.println(words);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,11 +143,14 @@ public class SimonSays extends KeyAdapter {
 	public static void main(String[] args) throws Exception {
 
 		new SimonSays().makeAlbum();
-		Date timeAtEnd = new Date();
-		System.out.println((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000);
-		System.exit(0);
+		
+		
 	}
 
+	
+		
+		
+	
 }
 
 /*
