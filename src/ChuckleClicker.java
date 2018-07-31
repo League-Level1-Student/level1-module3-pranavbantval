@@ -1,10 +1,10 @@
-package extra;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ChuckleClicker implements ActionListener {
@@ -34,8 +34,14 @@ public class ChuckleClicker implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		// TODO Auto-generated method stub
-		// if (event.getSource() == joke);
+		if (event.getSource() == joke) {
+			JOptionPane.showMessageDialog(null, "What did one pickle say to the other? \n dill with it");
+		}
+		if (event.getSource() == punchline) {
+			JOptionPane.showMessageDialog(null, "Why did the kid cross the playground? \n To get to the other slide");
+		}
+
 	}
 }
