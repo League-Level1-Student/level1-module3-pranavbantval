@@ -37,16 +37,13 @@ public class Calculator implements ActionListener {
 		p.add(l);
 		p.add(ft);
 		p.add(TF);
-		p.add(equals);
 		p.add(add);
 		p.add(sub);
 		p.add(mul);
 		p.add(div);
 		f.setVisible(true);
-		ft.setText("first number");
-		TF.setText("second number");
-		equals.setText("equals");
-		equals.addActionListener(this);
+		ft.setText("               first number               ");
+		TF.setText("               second number               ");
 		add.setText("add");
 		add.addActionListener(this);
 		sub.setText("sub");
@@ -56,47 +53,75 @@ public class Calculator implements ActionListener {
 		div.setText("div");
 		div.addActionListener(this);
 		l.setVisible(true);
-		l.setText(aaa);
+		l.setText("Click operation button twice for correct answer");
 		f.pack();
+		f.setSize(500, 500);
 	}
 
 	private void add() {
 		result = x + y;
-
+		System.out.println(result);
+		l.setText(aaa + "=");
 	}
 
 	private void subtract() {
 		result = x - y;
+		System.out.println(result);
+		l.setText(aaa + "=");
 	}
 
 	private void multiply() {
 		result = x * y;
+		System.out.println(result);
+		l.setText(aaa + "=");
 	}
 
 	private void divide() {
 		result = x / y;
+		System.out.println(result);
+		l.setText(aaa + "=");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		JButton b = (JButton) e.getSource();
-		if (b.equals(equals)) {
+
+		a = ft.getText();
+		aa = TF.getText();
+		x = Integer.parseInt(a);
+		y = Integer.parseInt(aa);
+		aaa = Integer.toString(result);
+		if (b.equals(add)) {
+			add();
 			a = ft.getText();
 			aa = TF.getText();
 			x = Integer.parseInt(a);
 			y = Integer.parseInt(aa);
 			aaa = Integer.toString(result);
-			if (b.equals(add)) {
-				add();
-			} else if (b.equals(sub)) {
-				subtract();
-			} else if (b.equals(mul)) {
-				multiply();
-			} else if (b.equals(div)) {
-				divide();
-			}
+		} else if (b.equals(sub)) {
+			subtract();
+			a = ft.getText();
+			aa = TF.getText();
+			x = Integer.parseInt(a);
+			y = Integer.parseInt(aa);
+			aaa = Integer.toString(result);
+		} else if (b.equals(mul)) {
+			multiply();
+			a = ft.getText();
+			aa = TF.getText();
+			x = Integer.parseInt(a);
+			y = Integer.parseInt(aa);
+			aaa = Integer.toString(result);
+		} else if (b.equals(div)) {
+			divide();
+			a = ft.getText();
+			aa = TF.getText();
+			x = Integer.parseInt(a);
+			y = Integer.parseInt(aa);
+			aaa = Integer.toString(result);
 		}
+
 	}
 
 }
