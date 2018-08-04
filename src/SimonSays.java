@@ -23,6 +23,7 @@ static Date timeAtEnd = new Date();
 	// Complete steps 1 - 7 before you test
 	// 1. Make a JFrame variable
 	JFrame f = new JFrame();
+	int points=0;
 	String word;
 	HashMap<Integer, String> images = new HashMap<Integer, String>();
 	private int imageIndex;
@@ -50,7 +51,7 @@ static Date timeAtEnd = new Date();
 		showImage();
 		// 16. make a points variable to track the score. tell the user their score at
 		// the end.
-		int points = 0;
+		
 
 		// 17. if the keyCode matches the imageIndex and "Simon says..." increase their
 		// score
@@ -82,6 +83,7 @@ static Date timeAtEnd = new Date();
 		}
 		// 11. dispose of the frame
 		f.dispose();
+		
 		// 12. call the method to show an image
 		showImage();
 	}
@@ -133,7 +135,7 @@ static Date timeAtEnd = new Date();
 
 	void speak(String words) {
 		try {
-		Runtime.getRuntime().exec("say " + words).waitFor();
+	//	Runtime.getRuntime().exec("say " + words).waitFor();
 			System.out.println(words);
 		} catch (Exception e) {
 			e.printStackTrace();
