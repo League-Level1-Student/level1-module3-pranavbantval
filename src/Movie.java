@@ -15,6 +15,8 @@ public class Movie implements Comparable<Movie> {
 		this.stars = stars;
 	}
 
+	
+
 	public String getTitle() {
 		return this.title;
 	}

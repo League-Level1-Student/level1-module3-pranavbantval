@@ -19,18 +19,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class SimonSays extends KeyAdapter {
-static Date timeAtEnd = new Date();
+	static Date timeAtEnd = new Date();
 	// Complete steps 1 - 7 before you test
 	// 1. Make a JFrame variable
-	JFrame f = new JFrame();
-	int points=0;
+	JFrame f;
+	int points = 0;
 	String word;
 	HashMap<Integer, String> images = new HashMap<Integer, String>();
 	private int imageIndex;
 	private int tries = 0;
 	private int simonSays = 0;
 	static Date timeAtStart;
-
+String a;
+JLabel l;
 	private void makeAlbum() {
 		// 2. add 4 images which match keyboard keys like this: images.put(new
 		// Integer(KeyEvent.VK_UP), "image.jpg");
@@ -44,28 +45,28 @@ static Date timeAtEnd = new Date();
 				"When Simon Says to press a key press it \n otherwise press a different key");
 		// 4. call the method to show an image
 		showImage();
+		
 	}
 
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		showImage();
+		// showImage();
 		// 16. make a points variable to track the score. tell the user their score at
 		// the end.
-		
 
 		// 17. if the keyCode matches the imageIndex and "Simon says..." increase their
 		// score
 		System.out.println(keyCode);
 		System.out.println(imageIndex);
 		System.out.println(this.simonSays);
-		if (keyCode == imageIndex && this.simonSays==1) {
+		if (keyCode == imageIndex && this.simonSays == 1) {
 			points++;
 			speak("You were correct");
-		
+
 		}
 		// 18. if the keyCode doesn't match the imageIndex and "Simon didn't say..."
 		// increase their score
-		else if (keyCode != imageIndex && this.simonSays==0) {
+		else if (keyCode != imageIndex && this.simonSays == 0) {
 			points++;
 			speak("You were correct");
 		}
@@ -82,15 +83,15 @@ static Date timeAtEnd = new Date();
 			System.exit(0);
 		}
 		// 11. dispose of the frame
-		f.dispose();
-		
+		f.remove(getNextRandomImage());
+f.dispose();
 		// 12. call the method to show an image
 		showImage();
 	}
 
 	private void showImage() {
 		// 5. initialize your frame to a new JFrame()
-
+		f = new JFrame();
 		// 6. set the frame to visible
 		f.setVisible(true);
 		// frame.add(getNextRandomImage()); //7. rename to the name of your frame
@@ -103,11 +104,11 @@ static Date timeAtEnd = new Date();
 		// this key"
 		// Hint: use the simonSays int and a random number
 		Random r = new Random();
-		 this.simonSays = r.nextInt(2);
+		this.simonSays = r.nextInt(2);
 		word = "";
 		if (this.simonSays == 1) {
 			word = "Simon says";
-		} else if (this.simonSays== 0) {
+		} else if (this.simonSays == 0) {
 			word = "";
 		}
 		if (imageIndex == 37) {
@@ -120,6 +121,7 @@ static Date timeAtEnd = new Date();
 			word = word + "Press down arrow";
 		}
 		speak(word);
+		JOptionPane.showMessageDialog(null, "You have "+Integer.toString(points)+" points");
 	}
 
 	private Component getNextRandomImage() {
@@ -135,24 +137,21 @@ static Date timeAtEnd = new Date();
 
 	void speak(String words) {
 		try {
-	//	Runtime.getRuntime().exec("say " + words).waitFor();
+			 Runtime.getRuntime().exec("say " + words).waitFor();
 			System.out.println(words);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	
+
 	public static void main(String[] args) throws Exception {
 
 		new SimonSays().makeAlbum();
-		
-		
+
 	}
 
-	
-		
-		
-	
 }
 
 /*
